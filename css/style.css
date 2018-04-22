@@ -32,6 +32,7 @@
 }
 
 .Main-Board {
+    width: 200px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -46,9 +47,10 @@
 
 /* ELEMENTS */
 .Board-Button {
-    display: block;
-    min-width: 15px;
-    min-height: 15px;
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+
 }
 
 .Mine-Field {
@@ -61,4 +63,8 @@
 
 #input {
     max-width: 100px;
+}
+
+.Row-One {
+    background: purple;
 }

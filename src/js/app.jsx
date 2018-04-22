@@ -21,7 +21,7 @@ class Container extends React.Component {
         super(props);
         this.state = {
             mineCount: 10,
-            numberOfCells: 100,
+            numberOfCells: 49,
         }
     }
 
@@ -110,19 +110,31 @@ class Board extends React.Component {
             }
         }
 
-        let finalBoard = cells.map((e, i) => {
-            if (e !== 0) {
-                return (
-                    <button className="Mine-Field">o</button>
-                )
-            } else {
-                return (
-                    <button className="Field">o</button>
-                )
-            }
+        let currentRowSize = Math.sqrt(this.props.size);
+        let emptyBoard = new Array(currentRowSize);
+        for (let m = 0; m < currentRowSize; m++) {
+            emptyBoard[m] = 0;
+        }
+        let finalBoard = emptyBoard.map((e, i) => {
+            return (
+                <div className="Board-Row">
+                    {cells.map((e, i) => {
+                        if (e !== 0) {
+                            return (
+                                <button className="Mine-Field Board-Button Row-One">O</button>
+                            )
+                        } else {
+                            return (
+                                <button className="Field Board-Button Row-One">X</button>
+                            )
+                        }
 
+                    })}
+                </div>
+            )
         });
         console.log(finalBoard);
+
         return (
             finalBoard
         )
@@ -132,7 +144,7 @@ class Board extends React.Component {
         let finalBoard = this.createArray();
         return (
             <div className="Main-Board">
-                {finalBoard}
+                <div className="Row-One-Div">{finalBoard}</div>
             </div>
         )
     }
