@@ -86,7 +86,7 @@ class Board extends React.Component {
         let mineIDs = [];
         for (let i = 0; i < this.props.mines; i++) {
             let temp = Math.floor(Math.random() * this.props.size);
-            if (mineIDs.indexOf(temp) === false) {
+            if (mineIDs.indexOf(temp) === -1) {
                 mineIDs.push(temp);
             } else {
                 i--;
@@ -94,31 +94,45 @@ class Board extends React.Component {
         }
         return mineIDs;
     };
+
     createArray = () => {
         let mineFieldIDs = this.createMines();
         let cells = new Array(this.props.size);
+
         for (let j = 0; j < mineFieldIDs.length; j++) {
             let temp = mineFieldIDs[j];
-            cells[temp] = (mineFieldIDs[j]);
+            cells[temp] = mineFieldIDs[j];
         }
-        cells.map((e, i) => {
-            if (e !== "") {
+
+        for (let k = 0; k < cells.length; k++) {
+            if (typeof(cells[k]) !== "number") {
+                cells[k] = 0;
+            }
+        }
+
+        let finalBoard = cells.map((e, i) => {
+            if (e !== 0) {
                 return (
-                    <button className="Mine-Field">x</button>
+                    <button className="Mine-Field">o</button>
                 )
             } else {
                 return (
-                <button className="Field">x</button>
+                    <button className="Field">o</button>
                 )
             }
 
-        })
+        });
+        console.log(finalBoard);
+        return (
+            finalBoard
+        )
     };
 
     render() {
+        let finalBoard = this.createArray();
         return (
-            <div className="Board">
-                {board}
+            <div className="Main-Board">
+                {finalBoard}
             </div>
         )
     }

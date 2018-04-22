@@ -31,10 +31,14 @@
     flex-direction: column;
 }
 
-.Board {
-    width: auto;
-    background: darkorange;
+.Main-Board {
+    display: flex;
+    flex-wrap: wrap;
 }
+/*.Board {*/
+    /*width: auto;*/
+    /*background: darkorange;*/
+/*}*/
 
 .Text-Bar {
     background: darkgreen;
@@ -42,11 +46,12 @@
 
 /* ELEMENTS */
 .Board-Button {
-    width: 10px;
-    height: 10px;
+    display: block;
+    min-width: 15px;
+    min-height: 15px;
 }
 
-.Mine-Filed {
+.Mine-Field {
     background: red;
 }
 
