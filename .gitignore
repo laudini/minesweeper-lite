@@ -1,0 +1,6 @@
+.idea
+node_modules
+webpack.config.js
+package.json
+yarn.lock
+yarn-error.log

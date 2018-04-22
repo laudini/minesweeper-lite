@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* MAIN STRUCTURE */
+
+#app {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.Main-Container {
+    width: 700px;
+    max-width: 800px;
+    background: lightskyblue;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Choice-Menu {
+    width: 100%;
+    height: 5em;
+    background: blueviolet;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Board {
+    width: auto;
+    background: darkorange;
+}
+
+.Text-Bar {
+    background: darkgreen;
+}
+
+/* ELEMENTS */
+.Board-Button {
+    width: 10px;
+    height: 10px;
+}
+
+.Mine-Filed {
+    background: red;
+}
+
+.Field {
+    background: lime;
+}
+
+#input {
+    max-width: 100px;
+}
