@@ -24,7 +24,6 @@
 .Choice-Menu {
     width: 100%;
     height: 5em;
-    background: blueviolet;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,9 +31,11 @@
 }
 
 .Main-Board {
-    width: 200px;
+    width: 300px;
+    background: black;
+    flex-direction: column;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 /*.Board {*/
     /*width: auto;*/
@@ -42,7 +43,8 @@
 /*}*/
 
 .Text-Bar {
-    background: darkgreen;
+    background: black;
+    color: white;
 }
 
 /* ELEMENTS */
@@ -50,15 +52,18 @@
     display: inline-block;
     min-width: 20px;
     min-height: 20px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
 
 }
 
 .Mine-Field {
-    background: red;
+    background: slategray;
 }
 
 .Field {
-    background: lime;
+    background: slategray;
 }
 
 #input {
