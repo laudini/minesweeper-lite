@@ -12,10 +12,11 @@
 }
 
 .Main-Container {
+
+    border: 5px solid orange;
     width: 700px;
     max-width: 800px;
-    background: lightskyblue;
-
+    background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,20 +32,28 @@
 }
 
 .Main-Board {
+    border: 5px solid orange;
+    border-radius: 10%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 300px;
     background: black;
     flex-direction: column;
     display: flex;
     flex-wrap: nowrap;
 }
+
 /*.Board {*/
-    /*width: auto;*/
-    /*background: darkorange;*/
+/*width: auto;*/
+/*background: darkorange;*/
 /*}*/
 
 .Text-Bar {
-    background: black;
-    color: white;
+    width: 100%;
+    padding-top: 10px;
+    color: black;
+    font-weight: 900;
+    text-transform: capitalize;
 }
 
 /* ELEMENTS */
@@ -59,7 +68,7 @@
 }
 
 .Mine-Field {
-    background: slategray;
+    background: red;
 }
 
 .Field {

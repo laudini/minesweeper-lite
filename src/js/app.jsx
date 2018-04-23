@@ -31,24 +31,38 @@ class Container extends React.Component {
             numberOfCells: Number(e.target.value)
         })
     };
+
     setMines = (e) => {
         this.setState({
             mineCount: Number(e.target.value)
         })
     };
+
     startGame = () => {
         this.setState({
             gameIsReady: true
         })
     };
 
+    handleGoodClick = (e) => {;
+        if (e.button === 0) {
+            console.log('GOOD!');
+        } else if (e.button === 2) {
+            console.log('FLAG HERE');
+        }
+    };
+
+    handleWrongClick = (e) => {
+        console.log('WRONG!');
+    };
 
     render() {
         if (this.state.gameIsReady === true) {
             return (
                 <div className="Main-Container">
                     <Menu setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
-                    <Board size={this.state.numberOfCells} mines={this.state.mineCount}/>
+                    <Board handleGoodClick={this.handleGoodClick} handleWrongClick={this.handleWrongClick}
+                           size={this.state.numberOfCells} mines={this.state.mineCount}/>
                     <Bar/>
                 </div>
             )
@@ -56,7 +70,7 @@ class Container extends React.Component {
             return (
                 <div className="Main-Container">
                     <Menu setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
-                    <Board size={0} mines={0}/>
+                    <div>^ CHOOSE YOUR SETTINGS ^</div>
                     <Bar/>
                 </div>
             )
@@ -98,8 +112,8 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            size : this.props.size,
-            mines : this.props.mines
+            size: this.props.size,
+            mines: this.props.mines
         }
     }
 
@@ -139,7 +153,6 @@ class Board extends React.Component {
         for (let m = 0; m < currentRowSize; m++) {
             emptyBoard[m] = 0;
         }
-        ;
         let finalBoard = emptyBoard.map((e, i) => {
             switch (i) {
                 case 0:
@@ -148,11 +161,13 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j < currentRowSize) {
                                     return (
-                                        <button className="Mine-Field Board-Button">1O</button>
+                                        <button onClick={(e) => this.props.handleWrongClick(e)}
+                                                className="Mine-Field Board-Button">1O</button>
                                     )
                                 } else if (el === 0 && j < currentRowSize) {
                                     return (
-                                        <button className="Field Board-Button">1X</button>
+                                        <button onClick={(e) => this.props.handleGoodClick(e)}
+                                                className="Field Board-Button">1X</button>
                                     )
                                 }
 
