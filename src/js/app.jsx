@@ -44,7 +44,7 @@ class Container extends React.Component {
         })
     };
 
-    handleGoodClick = (e) => {;
+    handleGoodClick = (e) => {
         if (e.button === 0) {
             console.log('GOOD!');
         } else if (e.button === 2) {
@@ -53,7 +53,11 @@ class Container extends React.Component {
     };
 
     handleWrongClick = (e) => {
-        console.log('WRONG!');
+        if (e.button === 0) {
+            console.log('MINA!');
+        } else if (e.button === 2) {
+            console.log('FLAG HERE');
+        }
     };
 
     render() {
@@ -161,12 +165,12 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j < currentRowSize) {
                                     return (
-                                        <button onClick={(e) => this.props.handleWrongClick(e)}
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleWrongClick(e)}
                                                 className="Mine-Field Board-Button">1O</button>
                                     )
                                 } else if (el === 0 && j < currentRowSize) {
                                     return (
-                                        <button onClick={(e) => this.props.handleGoodClick(e)}
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleGoodClick(e)}
                                                 className="Field Board-Button">1X</button>
                                     )
                                 }
