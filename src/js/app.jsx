@@ -46,17 +46,21 @@ class Container extends React.Component {
 
     handleGoodClick = (e) => {
         if (e.button === 0) {
-            console.log('GOOD!');
+            e.target.classList.remove("Board-Button");
+            e.target.classList.add("Button-Cleared");
         } else if (e.button === 2) {
-            console.log('FLAG HERE');
+            e.preventDefault();
+            e.target.classList.add("Button-Flagged");
         }
     };
 
     handleWrongClick = (e) => {
         if (e.button === 0) {
-            console.log('MINA!');
+            e.target.classList.remove("Board-Button");
+            e.target.classList.add("Button-Failed");
         } else if (e.button === 2) {
-            console.log('FLAG HERE');
+            e.preventDefault();
+            e.target.classList.add("Button-Flagged");
         }
     };
 
@@ -91,7 +95,7 @@ class Menu extends React.Component {
     render() {
         return (
             <div className="Choice-Menu">
-                <div><label>MINEFIELD SIZE:
+                <div className="Div-With-Labels"><label className="Label-Size">SIZE:
                     <select onChange={(e) => this.props.setBoard(e)}>
                         <option>49</option>
                         <option>64</option>
@@ -99,12 +103,12 @@ class Menu extends React.Component {
                         <option>100</option>
                     </select>
                 </label>
-                    <label>Mine count:
-                        <input type="number" id="input" onChange={(e) => this.props.setMines(e)}/>
+                    <label className="Label-Mines">MINES:
+                        <input type="number" defaultValue="10" id="input" onChange={(e) => this.props.setMines(e)}/>
                     </label>
                 </div>
-                <div>
-                    <button onClick={this.props.startGame}>PLAY</button>
+                <div className="Play-Button-Space">
+                    <button className="Play-Button" onClick={this.props.startGame}>PLAY</button>
                 </div>
             </div>
         )
@@ -165,12 +169,12 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j < currentRowSize) {
                                     return (
-                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleWrongClick(e)}
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)}
                                                 className="Mine-Field Board-Button">1O</button>
                                     )
                                 } else if (el === 0 && j < currentRowSize) {
                                     return (
-                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleGoodClick(e)}
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)}
                                                 className="Field Board-Button">1X</button>
                                     )
                                 }
@@ -185,11 +189,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= currentRowSize && j < (currentRowSize * 2)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">2O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">2O</button>
                                     )
                                 } else if (el === 0 && j >= currentRowSize && j < (currentRowSize * 2)) {
                                     return (
-                                        <button className="Field Board-Button">2X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">2X</button>
                                     )
                                 }
 
@@ -203,11 +207,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 2) && j < (currentRowSize * 3)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">3O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">3O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 2) && j < (currentRowSize * 3)) {
                                     return (
-                                        <button className="Field Board-Button">3X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">3X</button>
                                     )
                                 }
 
@@ -221,11 +225,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 3) && j < (currentRowSize * 4)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">4O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">4O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 3) && j < (currentRowSize * 4)) {
                                     return (
-                                        <button className="Field Board-Button">4X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">4X</button>
                                     )
                                 }
 
@@ -239,11 +243,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 4) && j < (currentRowSize * 5)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">5O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">5O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 4) && j < (currentRowSize * 5)) {
                                     return (
-                                        <button className="Field Board-Button">5X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">5X</button>
                                     )
                                 }
 
@@ -257,11 +261,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 5) && j < (currentRowSize * 6)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">6O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">6O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 5) && j < (currentRowSize * 6)) {
                                     return (
-                                        <button className="Field Board-Button">6X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">6X</button>
                                     )
                                 }
 
@@ -275,11 +279,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">7O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">7O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
                                     return (
-                                        <button className="Field Board-Button">7X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">7X</button>
                                     )
                                 }
 
@@ -293,11 +297,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 7) && j < (currentRowSize * 8)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">8O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">8O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 7) && j < (currentRowSize * 8)) {
                                     return (
-                                        <button className="Field Board-Button">8X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">8X</button>
                                     )
                                 }
 
@@ -311,11 +315,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 8) && j < (currentRowSize * 9)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">9O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">9O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 8) && j < (currentRowSize * 9)) {
                                     return (
-                                        <button className="Field Board-Button">9X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">9X</button>
                                     )
                                 }
 
@@ -329,11 +333,11 @@ class Board extends React.Component {
                             {cells.map((el, j) => {
                                 if (el !== 0 && j >= (currentRowSize * 9) && j < (currentRowSize * 10)) {
                                     return (
-                                        <button className="Mine-Field Board-Button">0O</button>
+                                        <button onContextMenu={(e) => this.props.handleWrongClick(e)} onClick={(e) => this.props.handleWrongClick(e)} className="Mine-Field Board-Button">0O</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 9) && j < (currentRowSize * 10)) {
                                     return (
-                                        <button className="Field Board-Button">0X</button>
+                                        <button onContextMenu={(e) => this.props.handleGoodClick(e)} onClick={(e) => this.props.handleGoodClick(e)} className="Field Board-Button">0X</button>
                                     )
                                 }
 

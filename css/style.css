@@ -3,20 +3,25 @@
     padding: 0;
 }
 
+body {
+    height: 100vh;
+    background: linear-gradient(#000000, #999999 ,#9198e5) no-repeat;
+}
+
 /* MAIN STRUCTURE */
 
 #app {
+    padding-top: 8%;
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
 .Main-Container {
-
-    border: 5px solid orange;
+    border: 3px solid #999999;
+    background: #e6e6e6;
     width: 700px;
     max-width: 800px;
-    background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,13 +36,20 @@
     flex-direction: column;
 }
 
+.Label-Size {
+    padding-right : 5px;
+}
+.Label-Mines {
+    padding-left : 10px;
+}
+
 .Main-Board {
-    border: 5px solid orange;
+    /*border: 2px solid #000080;*/
     border-radius: 10%;
     padding-top: 20px;
     padding-bottom: 20px;
     width: 300px;
-    background: black;
+    /*background: #ccf5ff;*/
     flex-direction: column;
     display: flex;
     flex-wrap: nowrap;
@@ -57,6 +69,40 @@
 }
 
 /* ELEMENTS */
+
+.Play-Button {
+    background: #637d8f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#637d8f));
+    background: -webkit-linear-gradient(top, #000000, #637d8f);
+    background: -moz-linear-gradient(top, #000000, #637d8f);
+    background: -ms-linear-gradient(top, #000000, #637d8f);
+    background: -o-linear-gradient(top, #000000, #637d8f);
+    padding: 6.5px 23px;
+    -webkit-border-radius: 39px;
+    -moz-border-radius: 39px;
+    border-radius: 39px;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: Georgia, Serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+.Play-Button:hover {
+    background: #1b1f21;
+    color: #ccc;
+}
+.Play-Button:active {
+    background: #32383d;
+}
+.Play-Button-Space {
+    padding-top: 5px;
+}
+
+
 .Board-Button {
     display: inline-block;
     min-width: 20px;
@@ -64,19 +110,44 @@
     width: 30px;
     height: 30px;
     border: 1px solid black;
+    background: #404040;
 
+}
+.Button-Cleared {
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    background: #b3b3b3;
+}
+.Button-Failed {
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    background: red;
+}
+.Button-Flagged {
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    background: green;
 }
 
 .Mine-Field {
-    background: red;
-}
-
-.Field {
-    background: slategray;
+    /*background: red;*/
 }
 
 #input {
-    max-width: 100px;
+    text-align: center;
+    max-width: 50px;
 }
 
 .Row-One {
