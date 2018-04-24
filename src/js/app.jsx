@@ -22,7 +22,8 @@ class Container extends React.Component {
         this.state = {
             mineCount: 10,
             numberOfCells: 49,
-            gameIsReady: false
+            gameIsReady: false,
+            text: "Welcome in Minesweeper. Created by Laudini"
         }
     }
 
@@ -119,10 +120,24 @@ class Container extends React.Component {
             e.target.classList.remove("Board-Button");
             e.target.classList.add("Button-Failed");
             e.target.setAttribute("disabled", "disabled");
+            let allBtns = document.getElementsByClassName("Board-Button");
+            console.log(allBtns);
+            for (let p = 0; p < allBtns.length; p++ ) {
+            allBtns[p].setAttribute("disabled", "disabled");
+            }
+
         } else if (e.button === 2) {
             e.preventDefault();
             e.target.classList.toggle("Button-Flagged");
+            e.target.innerText = "0";
         }
+    };
+
+    changeText = () => {
+        let texts = ['Welcome in the game', 'Recommended mine count not higher than 20!', 'Game created by Kamil Krzeminski (laudini)']
+        this.setState({
+            text: texts[Math.floor(Math.random() * texts.length)]
+        })
     };
 
     render() {
@@ -132,7 +147,7 @@ class Container extends React.Component {
                     <Menu setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
                     <Board handleGoodClick={this.handleGoodClick} handleWrongClick={this.handleWrongClick}
                            size={this.state.numberOfCells} mines={this.state.mineCount}/>
-                    <Bar/>
+                    <Bar text={this.state.text}/>
                 </div>
             )
         } else {
@@ -140,7 +155,7 @@ class Container extends React.Component {
                 <div className="Main-Container">
                     <Menu setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
                     <div>^ CHOOSE YOUR SETTINGS ^</div>
-                    <Bar/>
+                    <Bar text={this.state.text}/>
                 </div>
             )
         }
@@ -190,19 +205,23 @@ class Board extends React.Component {
         let mineIDs = [];
         for (let i = 0; i < this.props.mines; i++) {
             let temp = Math.floor(Math.random() * this.props.size);
+            //
+            // TUU NAPRAWIC RANDOM BO PSUJE MINY!
+            //
+            //
             if (mineIDs.indexOf(temp) === -1) {
                 mineIDs.push(temp);
             } else {
                 i--;
             }
         }
-        console.log(mineIDs.length);
+        console.log(mineIDs);
         return mineIDs;
     };
 
     createArray = () => {
         let mineFieldIDs = this.createMines();
-        console.log(mineFieldIDs.length);
+        console.log(mineFieldIDs);
         let cells = new Array(this.props.size);
         console.log(cells.length);
 
@@ -211,7 +230,7 @@ class Board extends React.Component {
             let temp = mineFieldIDs[j];
             cells[temp] = mineFieldIDs[j];
         }
-
+        console.log(cells);
         for (let k = 0; k < cells.length; k++) {
             if (typeof(cells[k]) !== "number") {
                 cells[k] = 0;
@@ -364,7 +383,7 @@ class Board extends React.Component {
                                     return (
                                         <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
                                                 onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">O</button>
+                                                className="Mine-Field Board-Button">0</button>
                                     )
                                 } else if (el === 0 && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
                                     return (
@@ -471,7 +490,7 @@ class Bar extends React.Component {
     render() {
         return (
             <div className="Text-Bar">
-                Text will be displayed here
+                {this.props.text}
             </div>
         )
     }
