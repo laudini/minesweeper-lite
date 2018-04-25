@@ -40,9 +40,11 @@ class Container extends React.Component {
     };
 
     startGame = () => {
+        if (this.state.mineCount <= this.state.numberOfCells)
         this.setState({
             gameIsReady: this.state.gameIsReady === true ? false : true
         })
+        console.log('wrong mines number');
     };
 
     handleGoodClick = (e) => {
@@ -144,7 +146,7 @@ class Container extends React.Component {
         if (this.state.gameIsReady === true) {
             return (
                 <div className="Main-Container">
-                    <Menu setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
+                    <Menu  maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
                     <Board handleGoodClick={this.handleGoodClick} handleWrongClick={this.handleWrongClick}
                            size={this.state.numberOfCells} mines={this.state.mineCount}/>
                     <Bar text={this.state.text}/>
@@ -153,7 +155,7 @@ class Container extends React.Component {
         } else {
             return (
                 <div className="Main-Container">
-                    <Menu setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
+                    <Menu maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
                     <div>^ CHOOSE YOUR SETTINGS ^</div>
                     <Bar text={this.state.text}/>
                 </div>
@@ -180,7 +182,7 @@ class Menu extends React.Component {
                     </select>
                 </label>
                     <label className="Label-Mines">MINES:
-                        <input type="number" defaultValue="10" id="input" onChange={(e) => this.props.setMines(e)}/>
+                        <input type="number" defaultValue="10" id="input" min={1} onChange={(e) => this.props.setMines(e)}/>
                     </label>
                 </div>
                 <div className="Play-Button-Space">
