@@ -35,16 +35,18 @@ class Container extends React.Component {
     };
 
     setMines = (e) => {
-        this.setState({
-            mineCount: Number(e.target.value)
-        })
+        if (e.target.value <= this.state.numberOfCells) {
+            this.setState({
+                mineCount: Number(e.target.value)
+            })
+        }
     };
 
     startGame = () => {
         if (this.state.mineCount <= this.state.numberOfCells)
-        this.setState({
-            gameIsReady: this.state.gameIsReady === true ? false : true
-        });
+            this.setState({
+                gameIsReady: this.state.gameIsReady === true ? false : true
+            });
         console.log('wrong mines number');
         this.changeText();
     };
@@ -71,11 +73,11 @@ class Container extends React.Component {
                             chosenIDs[o].dataset.id == neighbourIDs[5] ||
                             chosenIDs[o].dataset.id == neighbourIDs[6]
                         ) {
-                           numberOfNearMines++;
+                            numberOfNearMines++;
                         }
-                    } else if (Number(chosenIDs[o].dataset.id) % lineSize === lineSize -1) {
+                    } else if (Number(chosenIDs[o].dataset.id) % lineSize === lineSize - 1) {
 
-                       if (chosenIDs[o].dataset.id == neighbourIDs[1] ||
+                        if (chosenIDs[o].dataset.id == neighbourIDs[1] ||
                             chosenIDs[o].dataset.id == neighbourIDs[2] ||
                             chosenIDs[o].dataset.id == neighbourIDs[3] ||
                             chosenIDs[o].dataset.id == neighbourIDs[5] ||
@@ -113,8 +115,8 @@ class Container extends React.Component {
             e.target.setAttribute("disabled", "disabled");
             let allBtns = document.getElementsByClassName("Board-Button");
             console.log(allBtns);
-            for (let p = 0; p < allBtns.length; p++ ) {
-            allBtns[p].setAttribute("disabled", "disabled");
+            for (let p = 0; p < allBtns.length; p++) {
+                allBtns[p].setAttribute("disabled", "disabled");
             }
 
         } else if (e.button === 2) {
@@ -126,7 +128,7 @@ class Container extends React.Component {
 
     changeText = () => {
         // UZUPELNIC TEKSTY
-        let texts = ['How are you doin\' today?', 'Recommended mine count less than 20!', 'Game created by Kamil Krzeminski', 'Suggestions to krzeminski.yt.kamil@gmail.com','Minesweeper by Microsoft was created in 1990s','This is not a final version!','Follow me on github (laudini) to see more!']
+        let texts = ['How are you doin\' today?', 'Recommended mine count less than 20!', 'Game created by Kamil Krzeminski', 'Suggestions to krzeminski.yt.kamil@gmail.com', 'Minesweeper by Microsoft was created in 1990s', 'This is not a final version!', 'Follow me on github (laudini) to see more!']
         this.setState({
             text: texts[Math.floor(Math.random() * texts.length)]
         })
@@ -136,7 +138,8 @@ class Container extends React.Component {
         if (this.state.gameIsReady === true) {
             return (
                 <div className="Main-Container">
-                    <Menu  maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
+                    <Menu maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines}
+                          startGame={this.startGame}/>
                     <Board handleGoodClick={this.handleGoodClick} handleWrongClick={this.handleWrongClick}
                            size={this.state.numberOfCells} mines={this.state.mineCount}/>
                     <Bar text={this.state.text}/>
@@ -145,7 +148,8 @@ class Container extends React.Component {
         } else {
             return (
                 <div className="Main-Container">
-                    <Menu maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
+                    <Menu maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines}
+                          startGame={this.startGame}/>
                     <div className="Main-Board">^ CHOOSE YOUR SETTINGS ^</div>
                     <Bar text={this.state.text}/>
                 </div>
@@ -172,7 +176,8 @@ class Menu extends React.Component {
                     </select>
                 </label>
                     <label className="Label-Mines">MINES:
-                        <input type="number" defaultValue="10" id="input" min={1} onChange={(e) => this.props.setMines(e)}/>
+                        <input type="number" defaultValue="10" id="input" min={1} max={this.props.maxMines}
+                               onChange={(e) => this.props.setMines(e)}/>
                     </label>
                 </div>
                 <div className="Play-Button-Space">
