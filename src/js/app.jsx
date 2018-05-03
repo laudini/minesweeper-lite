@@ -125,7 +125,6 @@ class Container extends React.Component {
     };
 
     changeText = () => {
-        // UZUPELNIC TEKSTY
         let texts = ['How are you doin\' today?', 'Recommended mine count less than 20!', 'Game created by Kamil Krzeminski', 'Suggestions to krzeminski.yt.kamil@gmail.com', 'Minesweeper by Microsoft was created in 1990s', 'This is not a final version!', 'Follow me on github (laudini) to see more!']
         this.setState({
             text: texts[Math.floor(Math.random() * texts.length)]
@@ -200,10 +199,6 @@ class Board extends React.Component {
         let mineIDs = [];
         for (let i = 0; i < this.props.mines; i++) {
             let temp = Math.round(Math.random() * (this.props.size));
-            //
-            // TUU NAPRAWIC RANDOM BO PSUJE MINY!
-            //
-            //
             if (mineIDs.indexOf(temp) === -1) {
                 mineIDs.push(temp);
             } else {
