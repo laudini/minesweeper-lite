@@ -65,39 +65,26 @@ class Container extends React.Component {
                 if (chosenIDs[o].classList.contains("Mine-Field") === true) {
 
                     if (Number(chosenIDs[o].dataset.id) % lineSize === 0) {
-                        console.log('dataset id',chosenIDs[o].dataset.id);
-                        console.log('line',lineSize);
-                        console.log('modulo',Number(chosenIDs[o].dataset.id) % lineSize);
                         if (chosenIDs[o].dataset.id == neighbourIDs[0] ||
                             chosenIDs[o].dataset.id == neighbourIDs[2] ||
                             chosenIDs[o].dataset.id == neighbourIDs[4] ||
                             chosenIDs[o].dataset.id == neighbourIDs[5] ||
                             chosenIDs[o].dataset.id == neighbourIDs[6]
                         ) {
-                            console.log('lewy bok');
-                            console.log('nejbors', neighbourIDs[1], neighbourIDs[2], neighbourIDs[3], neighbourIDs[5], neighbourIDs[7]);
-                            numberOfNearMines++;
+                           numberOfNearMines++;
                         }
                     } else if (Number(chosenIDs[o].dataset.id) % lineSize === lineSize -1) {
 
-                        console.log('2222dataset id',chosenIDs[o].dataset.id);
-                        console.log('2222line',lineSize);
-                        console.log('2222modulo',Number(chosenIDs[o].dataset.id) % lineSize);
-                        if (chosenIDs[o].dataset.id == neighbourIDs[1] ||
+                       if (chosenIDs[o].dataset.id == neighbourIDs[1] ||
                             chosenIDs[o].dataset.id == neighbourIDs[2] ||
                             chosenIDs[o].dataset.id == neighbourIDs[3] ||
                             chosenIDs[o].dataset.id == neighbourIDs[5] ||
                             chosenIDs[o].dataset.id == neighbourIDs[7]
                         ) {
-                            console.log('nejbors', neighbourIDs[0], neighbourIDs[2], neighbourIDs[4], neighbourIDs[5], neighbourIDs[6]);
-                            console.log('prawy bok');
                             numberOfNearMines++;
                         }
                     } else {
 
-                        console.log('3333dataset id',chosenIDs[o].dataset.id);
-                        console.log('3333line',lineSize);
-                        console.log('3333modulo',Number(chosenIDs[o].dataset.id) % lineSize);
                         if (chosenIDs[o].dataset.id == neighbourIDs[0] ||
                             chosenIDs[o].dataset.id == neighbourIDs[1] ||
                             chosenIDs[o].dataset.id == neighbourIDs[2] ||
@@ -209,7 +196,7 @@ class Board extends React.Component {
     createMines = () => {
         let mineIDs = [];
         for (let i = 0; i < this.props.mines; i++) {
-            let temp = Math.floor((Math.random() * this.props.size) + 1);
+            let temp = Math.floor(Math.random() * (this.props.size - 1 + 1)) + 1;
             //
             // TUU NAPRAWIC RANDOM BO PSUJE MINY!
             //
@@ -226,16 +213,13 @@ class Board extends React.Component {
 
     createArray = () => {
         let mineFieldIDs = this.createMines();
-        console.log(mineFieldIDs);
         let cells = new Array(this.props.size);
-        console.log(cells.length);
 
 
         for (let j = 0; j < mineFieldIDs.length; j++) {
             let temp = mineFieldIDs[j];
             cells[temp] = mineFieldIDs[j];
         }
-        console.log(cells);
         for (let k = 0; k < cells.length; k++) {
             if (typeof(cells[k]) !== "number") {
                 cells[k] = 0;

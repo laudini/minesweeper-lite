@@ -5,7 +5,7 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(#000000, #999999 ,#9198e5) no-repeat;
+    background: linear-gradient(#000000, #999999, #9198e5) no-repeat;
 }
 
 /* MAIN STRUCTURE */
@@ -37,10 +37,11 @@ body {
 }
 
 .Label-Size {
-    padding-right : 5px;
+    padding-right: 5px;
 }
+
 .Label-Mines {
-    padding-left : 10px;
+    padding-left: 10px;
 }
 
 .Main-Board {
@@ -75,27 +76,29 @@ body {
     -webkit-border-radius: 39px;
     -moz-border-radius: 39px;
     border-radius: 39px;
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+    -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+    box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+    text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
     color: #ffffff;
     font-size: 15px;
     font-family: Georgia, Serif;
     text-decoration: none;
     vertical-align: middle;
 }
+
 .Play-Button:hover {
     background: #1b1f21;
     color: #ccc;
 }
+
 .Play-Button:active {
     background: #32383d;
 }
+
 .Play-Button-Space {
     padding-top: 5px;
 }
-
 
 .Board-Button {
     display: inline-block;
@@ -107,6 +110,7 @@ body {
     background: #404040;
 
 }
+
 .Button-Cleared {
     display: inline-block;
     min-width: 20px;
@@ -116,6 +120,7 @@ body {
     border: 1px solid black;
     background: #b3b3b3;
 }
+
 .Button-Failed {
     display: inline-block;
     min-width: 20px;
@@ -123,8 +128,11 @@ body {
     width: 30px;
     height: 30px;
     border: 1px solid black;
-    background: red;
+    background: red url("../images/mine.png");
+    background-size: cover;
+    color: transparent;
 }
+
 .Button-Flagged {
     display: inline-block;
     min-width: 20px;
