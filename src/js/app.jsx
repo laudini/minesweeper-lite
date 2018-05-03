@@ -47,7 +47,6 @@ class Container extends React.Component {
             this.setState({
                 gameIsReady: this.state.gameIsReady === true ? false : true
             });
-        console.log('wrong mines number');
         this.changeText();
     };
 
@@ -114,7 +113,6 @@ class Container extends React.Component {
             e.target.classList.add("Button-Failed");
             e.target.setAttribute("disabled", "disabled");
             let allBtns = document.getElementsByClassName("Board-Button");
-            console.log(allBtns);
             for (let p = 0; p < allBtns.length; p++) {
                 allBtns[p].setAttribute("disabled", "disabled");
             }
@@ -212,7 +210,6 @@ class Board extends React.Component {
                 i--;
             }
         }
-        console.log(mineIDs);
         return mineIDs;
     };
 
@@ -229,7 +226,6 @@ class Board extends React.Component {
             let temp = mineFieldIDs[j];
             cells[temp] = "mine"
         }
-        console.log(cells);
         let currentRowSize = Math.sqrt(this.props.size);
         let emptyBoard = new Array(currentRowSize);
         for (let m = 0; m < currentRowSize; m++) {
