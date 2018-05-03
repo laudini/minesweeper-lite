@@ -158,7 +158,7 @@ class Container extends React.Component {
             return (
                 <div className="Main-Container">
                     <Menu maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines} startGame={this.startGame}/>
-                    <div>^ CHOOSE YOUR SETTINGS ^</div>
+                    <div className="Main-Board">^ CHOOSE YOUR SETTINGS ^</div>
                     <Bar text={this.state.text}/>
                 </div>
             )

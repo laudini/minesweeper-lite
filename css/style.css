@@ -44,21 +44,15 @@ body {
 }
 
 .Main-Board {
-    /*border: 2px solid #000080;*/
     border-radius: 10%;
     padding-top: 20px;
     padding-bottom: 20px;
     width: 300px;
-    /*background: #ccf5ff;*/
+    min-height: 300px;
     flex-direction: column;
     display: flex;
     flex-wrap: nowrap;
 }
-
-/*.Board {*/
-/*width: auto;*/
-/*background: darkorange;*/
-/*}*/
 
 .Text-Bar {
     width: 100%;
