@@ -23,7 +23,8 @@ class Container extends React.Component {
             mineCount: 10,
             numberOfCells: 49,
             gameIsReady: false,
-            text: "Welcome in Minesweeper. Created by Laudini"
+            text: "Welcome in Minesweeper. Created by Laudini",
+            flagged: 0
         }
     }
 
@@ -208,7 +209,7 @@ class Board extends React.Component {
     createMines = () => {
         let mineIDs = [];
         for (let i = 0; i < this.props.mines; i++) {
-            let temp = Math.floor(Math.random() * this.props.size);
+            let temp = Math.floor((Math.random() * this.props.size) + 1);
             //
             // TUU NAPRAWIC RANDOM BO PSUJE MINY!
             //
