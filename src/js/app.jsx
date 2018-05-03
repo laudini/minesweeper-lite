@@ -43,8 +43,9 @@ class Container extends React.Component {
         if (this.state.mineCount <= this.state.numberOfCells)
         this.setState({
             gameIsReady: this.state.gameIsReady === true ? false : true
-        })
+        });
         console.log('wrong mines number');
+        this.changeText();
     };
 
     handleGoodClick = (e) => {
@@ -136,7 +137,8 @@ class Container extends React.Component {
     };
 
     changeText = () => {
-        let texts = ['Welcome in the game', 'Recommended mine count not higher than 20!', 'Game created by Kamil Krzeminski (laudini)']
+        // UZUPELNIC TEKSTY
+        let texts = ['How are you doin\' today?', 'Recommended mine count less than 20!', 'Game created by Kamil Krzeminski', 'Suggestions to krzeminski.yt.kamil@gmail.com','Minesweeper by Microsoft was created in 1990s','This is not a final version!','Follow me on github (laudini) to see more!']
         this.setState({
             text: texts[Math.floor(Math.random() * texts.length)]
         })
