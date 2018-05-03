@@ -214,6 +214,7 @@ class Board extends React.Component {
     createArray = () => {
         let mineFieldIDs = this.createMines();
         let cells = new Array(this.props.size);
+        console.log(cells);
 
 
         for (let j = 0; j < mineFieldIDs.length; j++) {
@@ -236,13 +237,22 @@ class Board extends React.Component {
                     return (
                         <div className="Board-Row">
                             {cells.map((el, j) => {
+
                                 if (el !== 0 && j < currentRowSize) {
                                     return (
                                         <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
                                                 onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
+                                                className="Mine-Field Board-Button">1</button>
                                     )
-                                } else if (el === 0 && j < currentRowSize) {
+                                }
+                                else if (el === 0 && j < currentRowSize && this.props.size === this.props.mines) {
+                                    return (
+                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                onClick={(e) => this.props.handleWrongClick(e)}
+                                                className="Mine-Field Board-Button">1</button>
+                                    )
+                                }
+                                else if (el === 0 && j < currentRowSize) {
                                     return (
                                         <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
                                                 onClick={(e) => this.props.handleGoodClick(e)}
