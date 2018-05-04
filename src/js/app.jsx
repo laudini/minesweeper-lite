@@ -54,6 +54,7 @@ class Container extends React.Component {
     };
 
     handleGoodClick = (e) => {
+
         if (e.button === 0) {
             e.currentTarget.classList.remove("Board-Button");
             e.currentTarget.classList.add("Button-Cleared");
@@ -110,9 +111,24 @@ class Container extends React.Component {
             e.preventDefault();
             e.currentTarget.classList.toggle("Button-Flagged");
         }
+        let allMines = document.querySelectorAll(".Mine-Field");
+        let correctFlags = 0;
+        for (let i = 0; i < allMines.length; i++) {
+            if (allMines[i].classList.contains('Button-Flagged') === true) {
+                correctFlags += 1
+            }
+        }
+        console.log('TUTAJ', correctFlags);
+        console.log(this.state.mineCount);
+        if (correctFlags === this.state.mineCount) {
+            this.setState({
+                text: 'win'
+            })
+        }
     };
 
     handleWrongClick = (e) => {
+
         if (e.button === 0) {
             e.currentTarget.classList.remove("Board-Button");
             e.currentTarget.classList.add("Button-Failed");
@@ -219,255 +235,255 @@ class Board extends React.Component {
     };
 
     createArray = () => {
-        let mineFieldIDs = this.createMines();
+            let mineFieldIDs = this.createMines();
 
-        let cells = [];
-        for (let i = 0; i < this.props.size; i++) {
-            cells[i] = i;
-        }
-
-
-        for (let j = 0; j < mineFieldIDs.length; j++) {
-            let temp = mineFieldIDs[j];
-            cells[temp] = "mine"
-        }
-        let currentRowSize = Math.sqrt(this.props.size);
-        let emptyBoard = new Array(currentRowSize);
-        for (let m = 0; m < currentRowSize; m++) {
-            emptyBoard[m] = 0;
-        }
-        let finalBoard = emptyBoard.map((e, i) => {
-            switch (i) {
-                case 0:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-
-                                if (el === "mine" && j < currentRowSize) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                }
-                                else if (el !== "mine" && j < currentRowSize) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) =>
-                                                    this.props.handleGoodClick(e)
-                                                }
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 1:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= currentRowSize && j < (currentRowSize * 2)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= currentRowSize && j < (currentRowSize * 2)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 2:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 2) && j < (currentRowSize * 3)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 2) && j < (currentRowSize * 3)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 3:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 3) && j < (currentRowSize * 4)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 3) && j < (currentRowSize * 4)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 4:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 4) && j < (currentRowSize * 5)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 4) && j < (currentRowSize * 5)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 5:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 5) && j < (currentRowSize * 6)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 5) && j < (currentRowSize * 6)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 6:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 7:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 7) && j < (currentRowSize * 8)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 7) && j < (currentRowSize * 8)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 8:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 8) && j < (currentRowSize * 9)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 8) && j < (currentRowSize * 9)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
-                case 9:
-                    return (
-                        <div className="Board-Row">
-                            {cells.map((el, j) => {
-                                if (el === "mine" && j >= (currentRowSize * 9) && j < (currentRowSize * 10)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
-                                                onClick={(e) => this.props.handleWrongClick(e)}
-                                                className="Mine-Field Board-Button">0</button>
-                                    )
-                                } else if (el !== "mine" && j >= (currentRowSize * 9) && j < (currentRowSize * 10)) {
-                                    return (
-                                        <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
-                                                className="Field Board-Button">0</button>
-                                    )
-                                }
-
-                            })}
-
-                        </div>
-                    );
+            let cells = [];
+            for (let i = 0; i < this.props.size; i++) {
+                cells[i] = i;
             }
-        });
 
-        return (
-            finalBoard
-        )
+
+            for (let j = 0; j < mineFieldIDs.length; j++) {
+                let temp = mineFieldIDs[j];
+                cells[temp] = "mine"
+            }
+            let currentRowSize = Math.sqrt(this.props.size);
+            let emptyBoard = new Array(currentRowSize);
+            for (let m = 0; m < currentRowSize; m++) {
+                emptyBoard[m] = 0;
+            }
+            let finalBoard = emptyBoard.map((e, i) => {
+                switch (i) {
+                    case 0:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+
+                                    if (el === "mine" && j < currentRowSize) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    }
+                                    else if (el !== "mine" && j < currentRowSize) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) =>
+                                                        this.props.handleGoodClick(e)
+                                                    }
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 1:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= currentRowSize && j < (currentRowSize * 2)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= currentRowSize && j < (currentRowSize * 2)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 2:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 2) && j < (currentRowSize * 3)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 2) && j < (currentRowSize * 3)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 3:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 3) && j < (currentRowSize * 4)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 3) && j < (currentRowSize * 4)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 4:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 4) && j < (currentRowSize * 5)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 4) && j < (currentRowSize * 5)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 5:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 5) && j < (currentRowSize * 6)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 5) && j < (currentRowSize * 6)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 6:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 6) && j < (currentRowSize * 7)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 7:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 7) && j < (currentRowSize * 8)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 7) && j < (currentRowSize * 8)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 8:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 8) && j < (currentRowSize * 9)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 8) && j < (currentRowSize * 9)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                    case 9:
+                        return (
+                            <div className="Board-Row">
+                                {cells.map((el, j) => {
+                                    if (el === "mine" && j >= (currentRowSize * 9) && j < (currentRowSize * 10)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleWrongClick(e)}
+                                                    onClick={(e) => this.props.handleWrongClick(e)}
+                                                    className="Mine-Field Board-Button">0</button>
+                                        )
+                                    } else if (el !== "mine" && j >= (currentRowSize * 9) && j < (currentRowSize * 10)) {
+                                        return (
+                                            <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
+                                                    onClick={(e) => this.props.handleGoodClick(e)}
+                                                    className="Field Board-Button">0</button>
+                                        )
+                                    }
+
+                                })}
+
+                            </div>
+                        );
+                }
+            });
+
+            return (
+                finalBoard
+            )
     };
 
     render() {
