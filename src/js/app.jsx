@@ -24,20 +24,23 @@ class Container extends React.Component {
             numberOfCells: 49,
             gameIsReady: false,
             text: "Welcome in Minesweeper. Created by Laudini",
-            flagged: 0
+            flagged: 0,
+            cleared: 0
         }
     }
 
     setBoard = (e) => {
         this.setState({
-            numberOfCells: Number(e.target.value)
+            gameIsReady: false,
+            numberOfCells: Number(e.currentTarget.value)
         })
     };
 
     setMines = (e) => {
-        if (e.target.value <= this.state.numberOfCells) {
+        if (e.currentTarget.value <= this.state.numberOfCells) {
             this.setState({
-                mineCount: Number(e.target.value)
+                gameIsReady: false,
+                mineCount: Number(e.currentTarget.value)
             })
         }
     };
@@ -52,10 +55,11 @@ class Container extends React.Component {
 
     handleGoodClick = (e) => {
         if (e.button === 0) {
-            e.target.classList.remove("Board-Button");
-            e.target.classList.add("Button-Cleared");
-            e.target.setAttribute("disabled", "disabled");
-            let clickedID = Number(e.target.dataset.id);
+            e.currentTarget.classList.remove("Board-Button");
+            e.currentTarget.classList.add("Button-Cleared");
+            e.currentTarget.setAttribute("disabled", "disabled");
+
+            let clickedID = Number(e.currentTarget.dataset.id);
             let lineSize = Math.sqrt(this.state.numberOfCells);
             let neighbourIDs = [clickedID - 1, clickedID + 1, clickedID + lineSize, clickedID + lineSize + 1, clickedID + lineSize - 1, clickedID - lineSize, clickedID - lineSize - 1, clickedID - lineSize + 1]
 
@@ -100,18 +104,19 @@ class Container extends React.Component {
                     }
                 }
             }
-            e.target.innerHTML = numberOfNearMines;
+            e.currentTarget.innerHTML = numberOfNearMines;
+
         } else if (e.button === 2) {
             e.preventDefault();
-            e.target.classList.toggle("Button-Flagged");
+            e.currentTarget.classList.toggle("Button-Flagged");
         }
     };
 
     handleWrongClick = (e) => {
         if (e.button === 0) {
-            e.target.classList.remove("Board-Button");
-            e.target.classList.add("Button-Failed");
-            e.target.setAttribute("disabled", "disabled");
+            e.currentTarget.classList.remove("Board-Button");
+            e.currentTarget.classList.add("Button-Failed");
+            e.currentTarget.setAttribute("disabled", "disabled");
             let allBtns = document.getElementsByClassName("Board-Button");
             for (let p = 0; p < allBtns.length; p++) {
                 allBtns[p].setAttribute("disabled", "disabled");
@@ -119,11 +124,15 @@ class Container extends React.Component {
 
         } else if (e.button === 2) {
             e.preventDefault();
-            e.target.classList.toggle("Button-Flagged");
-            e.target.innerText = "0";
+            e.currentTarget.classList.toggle("Button-Flagged");
+            e.currentTarget.innerText = "0";
         }
     };
-
+    gameEndText = () => {
+        this.setState({
+            text: "Congratz. You won!"
+        })
+    }
     changeText = () => {
         let texts = ['How are you doin\' today?', 'Recommended mine count less than 20!', 'Game created by Kamil Krzeminski', 'Suggestions to krzeminski.yt.kamil@gmail.com', 'Minesweeper by Microsoft was created in 1990s', 'This is not a final version!', 'Follow me on github (laudini) to see more!']
         this.setState({
@@ -137,7 +146,8 @@ class Container extends React.Component {
                 <div className="Main-Container">
                     <Menu maxMines={this.state.numberOfCells} setBoard={this.setBoard} setMines={this.setMines}
                           startGame={this.startGame}/>
-                    <Board handleGoodClick={this.handleGoodClick} handleWrongClick={this.handleWrongClick}
+                    <Board handleGoodClick={this.handleGoodClick}
+                           handleWrongClick={this.handleWrongClick}
                            size={this.state.numberOfCells} mines={this.state.mineCount}/>
                     <Bar text={this.state.text}/>
                 </div>
@@ -243,7 +253,9 @@ class Board extends React.Component {
                                 else if (el !== "mine" && j < currentRowSize) {
                                     return (
                                         <button data-id={j} onContextMenu={(e) => this.props.handleGoodClick(e)}
-                                                onClick={(e) => this.props.handleGoodClick(e)}
+                                                onClick={(e) =>
+                                                    this.props.handleGoodClick(e)
+                                                }
                                                 className="Field Board-Button">0</button>
                                     )
                                 }
