@@ -112,19 +112,23 @@ class Container extends React.Component {
             e.currentTarget.classList.toggle("Button-Flagged");
         }
         let allMines = document.querySelectorAll(".Mine-Field");
+        let allDisabled = document.querySelectorAll(".Button-Cleared");
+        console.log(allDisabled);
         let correctFlags = 0;
         for (let i = 0; i < allMines.length; i++) {
             if (allMines[i].classList.contains('Button-Flagged') === true) {
                 correctFlags += 1
             }
         }
-        console.log('TUTAJ', correctFlags);
-        console.log(this.state.mineCount);
-        if (correctFlags === this.state.mineCount) {
-            this.setState({
-                text: 'win'
-            })
+        if (correctFlags === this.state.mineCount && allDisabled.length === (this.state.numberOfCells - this.state.mineCount)) {
+            this.gameFinished()
         }
+    };
+    gameFinished = () => {
+        this.setState({
+            text: "You won! Good game!",
+            gameIsReady: false
+        })
     };
 
     handleWrongClick = (e) => {
@@ -143,12 +147,20 @@ class Container extends React.Component {
             e.currentTarget.classList.toggle("Button-Flagged");
             e.currentTarget.innerText = "0";
         }
+        let allMines = document.querySelectorAll(".Mine-Field");
+        let allDisabled = document.querySelectorAll(".Button-Cleared");
+        console.log(allDisabled);
+        let correctFlags = 0;
+        for (let i = 0; i < allMines.length; i++) {
+            if (allMines[i].classList.contains('Button-Flagged') === true) {
+                correctFlags += 1
+            }
+        }
+        if (correctFlags === this.state.mineCount && allDisabled === this.state.numberOfCells - this.state.mineCount) {
+            this.gameFinished()
+        }
     };
-    gameEndText = () => {
-        this.setState({
-            text: "Congratz. You won!"
-        })
-    }
+
     changeText = () => {
         let texts = ['How are you doin\' today?', 'Recommended mine count less than 20!', 'Game created by Kamil Krzeminski', 'Suggestions to krzeminski.yt.kamil@gmail.com', 'Minesweeper by Microsoft was created in 1990s', 'This is not a final version!', 'Follow me on github (laudini) to see more!']
         this.setState({
